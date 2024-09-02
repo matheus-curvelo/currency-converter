@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <CurrencyConverter />
-  </div>
+  <CurrencyConverter />
 </template>
 
 <script>
