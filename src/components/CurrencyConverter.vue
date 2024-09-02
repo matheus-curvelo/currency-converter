@@ -3,7 +3,7 @@
       <h1 class="my-4">Currency Converter</h1>
       
       <form @submit.prevent="convertCurrency">
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="amountFrom" class="form-label">Valor a Converter:</label>
           <div class="input-group">
             <input
@@ -25,6 +25,12 @@
               </option>
             </select>
           </div>
+        </div>
+  
+        <div class="text-center my-2">
+          <button type="button" class="btn btn-sm btn-secondary" @click="invertCurrencies">
+            ⇅
+          </button>
         </div>
   
         <div class="mb-3">
@@ -83,9 +89,14 @@
         } catch (error) {
           console.error("Erro ao obter as taxas de câmbio:", error);
         }
+      },
+      invertCurrencies() {
+        const temp = this.currencyFrom;
+        this.currencyFrom = this.currencyTo;
+        this.currencyTo = temp;
+        this.result = null; // Limpa o resultado ao inverter
       }
     }
   };
   </script>
-  
   
