@@ -13,7 +13,7 @@
                             <select id="currencyFrom" v-model="currencyFrom" class="form-select" required>
                                 <option v-for="currencyOption in currencyOptions" :key="currencyOption"
                                     :value="currencyOption">
-                                    {{ currencyOption }}
+                                    {{ currencyNames[currencyOption] || currencyOption }}
                                 </option>
                             </select>
                         </div>
@@ -33,7 +33,7 @@
                             <select id="currencyTo" v-model="currencyTo" class="form-select" required>
                                 <option v-for="currencyOption in currencyOptions" :key="currencyOption"
                                     :value="currencyOption">
-                                    {{ currencyOption }}
+                                    {{ currencyNames[currencyOption] || currencyOption }}
                                 </option>
                             </select>
                         </div>
@@ -43,7 +43,10 @@
                 </form>
 
                 <div v-if="result" class="mt-4">
-                    <h3>Resultado: {{ amountFrom }} {{ currencyFrom }} = {{ result }} {{ currencyTo }}</h3>
+                    <h3>
+                        Resultado: {{ amountFrom }} {{ currencyNames[currencyFrom] || currencyFrom }} =
+                        {{ result }} {{ currencyNames[currencyTo] || currencyTo }}
+                    </h3>
                 </div>
             </div>
         </div>
@@ -52,7 +55,7 @@
 
 <script>
 import axios from 'axios';
-import '@/styles/index.scss'; // Certifique-se de que o caminho está correto
+import '@/styles/index.scss';
 
 export default {
     data() {
@@ -61,7 +64,19 @@ export default {
             currencyFrom: 'USD',
             currencyTo: 'EUR',
             result: null,
-            currencyOptions: ['USD', 'EUR', 'GBP', 'JPY', 'BRL', 'CAD', 'AUD', 'CHF', 'CNY']
+            currencyOptions: ['USD', 'CAD', 'AUD', 'EUR', 'GBP', 'JPY', 'BRL', 'CHF', 'CNY', 'KRW'],
+            currencyNames: {
+                USD: 'Dólar Americano',
+                CAD: 'Dólar Canadense',
+                AUD: 'Dólar Australiano',
+                EUR: 'Euro',
+                GBP: 'Libra Esterlina',
+                JPY: 'Iene Japonês',
+                BRL: 'Real',
+                CHF: 'Franco Suíço',
+                CNY: 'Yuan Chinês',
+                KRW: 'Won Sul-Coreano'
+            }
         };
     },
     watch: {
@@ -120,6 +135,4 @@ export default {
         padding: 12px;
     }
 }
-
-
 </style>
