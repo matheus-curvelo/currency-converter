@@ -80,6 +80,14 @@
         currencyOptions: ['USD', 'EUR', 'GBP', 'JPY', 'BRL', 'CAD', 'AUD', 'CHF', 'CNY']
       };
     },
+    watch: {
+      currencyFrom() {
+        this.result = null;
+      },
+      currencyTo() {
+        this.result = null;
+      }
+    },
     methods: {
       async convertCurrency() {
         try {
